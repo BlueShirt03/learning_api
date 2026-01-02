@@ -15,3 +15,8 @@ items = []
 @app.get("/")
 def root():
     return {"message": "API is running"}
+
+@app.get("/items")
+def get_items():
+    return {"items": items}
+
