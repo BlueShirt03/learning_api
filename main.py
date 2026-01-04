@@ -1,22 +1,15 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from typing import Union
+from fastapi import FastAPI
 
 app = FastAPI()
 
-# this class creates a schema that takes in a str and float data
-class ItemCreate(BaseModel):
-    name: str
-    price: float    
-
-# Fake database 
-items = []
-
-# Routes
 @app.get("/")
-def root():
-    return {"message": "API is running"}
+def read_root():
+    return {"Hello": "World"}
 
-@app.get("/items")
-def get_items():
-    return {"items": items}
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Union[str, None] = None):
+    return{"item_id": item_id, "q":q}
+
+
 
